@@ -16,7 +16,22 @@ class Design extends Model
     'description',
     'slug',
     'close_to_comment',
-    'is_live'
+    'is_live',
+    'upload_successful',
+    'disk'
+  ];
+
+  // FILE PATHS
+  public static $TMP_LOCATION = [
+    'ORIGINAL_FILE' => '/uploads/original/',
+    'LARGE_FILE' => '/uploads/large/',
+    'THUMBNAIL_FILE' => '/uploads/thumbnail/',
+  ];
+
+  public static $PUBLIC_LOCATION = [
+    'ORIGINAL_FILE' => '/uploads/designs/original/',
+    'LARGE_FILE' => '/uploads/designs/large/',
+    'THUMBNAIL_FILE' => '/uploads/designs/thumbnail/',
   ];
 
   // RELATIONSHIPS
