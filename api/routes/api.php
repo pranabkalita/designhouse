@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Designs\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Designs\DesignController;
+use App\Http\Controllers\Designs\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
   Route::name('designs.')->group(function() {
     Route::post('/designs', UploadController::class)->name('name');
+    Route::put('/designs/{design}', [DesignController::class, 'update'])->name('update');
   });
 
 });
