@@ -23,6 +23,10 @@ class DesignResource extends JsonResource
         'description' => $this->description,
         'is_live' => $this->is_live,
         'images' => $this->images,
+        'tags_list' => [
+          'tags' => $this->tagArray,
+          'normalized' => $this->tagArrayNormalized,
+        ],
         'dates' => [
           'created_at_human' => $this->created_at->diffForHumans(),
           'created_at' => $this->created_at,

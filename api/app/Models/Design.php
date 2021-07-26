@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Cviebrock\EloquentTaggable\Taggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Design extends Model
 {
-  use HasFactory;
+  use HasFactory, Taggable;
 
   protected $fillable = [
     'image',
