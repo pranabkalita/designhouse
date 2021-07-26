@@ -8,9 +8,9 @@ use App\Repositories\Eloquent\BaseRepository;
 
 class UserRepository extends BaseRepository implements IUser
 {
-  public function model()
+  public function __construct(User $user)
   {
-    return User::class;
+    parent::__construct($user);
   }
 
   public function all()

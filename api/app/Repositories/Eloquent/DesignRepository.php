@@ -8,9 +8,9 @@ use App\Repositories\Eloquent\BaseRepository;
 
 class DesignRepository extends BaseRepository implements IDesign
 {
-  public function model()
+  public function __construct(Design $design)
   {
-    return Design::class;
+    parent::__construct($design);
   }
 
   public function applyTags($id, $data)

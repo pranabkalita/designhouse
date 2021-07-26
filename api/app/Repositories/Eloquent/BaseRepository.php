@@ -4,14 +4,15 @@ namespace App\Repositories\Eloquent;
 
 use App\Exceptions\ModelNotDefined;
 use App\Repositories\Contracts\IBase;
+use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseRepository implements IBase
 {
   protected $model;
 
-  public function __construct()
+  public function __construct(Model $model)
   {
-    $this->model = $this->getModelClass();
+    $this->model = $model;
   }
 
   public function all()
@@ -53,14 +54,5 @@ abstract class BaseRepository implements IBase
     $record = $this->find($id);
 
     return $record->delete();
-  }
-
-  protected function getModelClass()
-  {
-    if (!method_exists($this, 'model')) {
-      throw new ModelNotDefined();
-    }
-
-    return app()->make($this->model());
   }
 }
