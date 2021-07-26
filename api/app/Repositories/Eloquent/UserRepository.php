@@ -15,6 +15,6 @@ class UserRepository extends BaseRepository implements IUser
 
   public function all()
   {
-    return $this->model->all();
+    return $this->model->get();
   }
 }

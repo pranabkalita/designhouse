@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
-use App\Models\User;
 use App\Repositories\Contracts\IUser;
-use Illuminate\Http\Request;
+use App\Repositories\Eloquent\Criteria\EagerLoad;
 
 class UserController extends Controller
 {
@@ -19,7 +20,9 @@ class UserController extends Controller
 
   public function index()
   {
-    $users = $this->iUser->all();
+    $users = $this->iUser->withCriteria([
+      new EagerLoad('designs')
+    ])->all();
 
     return UserResource::collection($users);
   }
