@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Designs;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DesignResource;
 use App\Jobs\UploadImage;
 use App\Models\Design;
 use Illuminate\Http\Request;
@@ -37,6 +38,6 @@ class UploadController extends Controller
     // dispatch a job to handle the image manipulation
     $this->dispatch(new UploadImage($design));
 
-    return response()->json($design, 200);
+    return new DesignResource($design);
   }
 }

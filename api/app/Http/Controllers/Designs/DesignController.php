@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Designs;
 use App\Models\Design;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DesignResource;
 
 class DesignController extends Controller
 {
@@ -24,6 +25,6 @@ class DesignController extends Controller
       'is_live' => !$design->upload_successful ? false : $request->is_live
     ]);
 
-    return response()->json($design, 200);
+    return new DesignResource($design);
   }
 }

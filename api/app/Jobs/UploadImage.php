@@ -72,13 +72,15 @@ class UploadImage implements ShouldQueue
         })
         ->save($file = storage_path($location . $this->design->image));
 
-        return $file;
+      return $file;
     }
 
-    protected function moveImage($file, $from, $to)
+    protected function moveImage($originalFilePath, $fileDisk, $targetFilePath)
     {
-      if (Storage::disk($from)->put($to . $this->design->image, fopen($file, 'r+'))) {
-        File::delete($file);
+      if (Storage::disk($fileDisk)->put($targetFilePath . $this->design->image, fopen($originalFilePath, 'r+'))) {
+        File::delete($originalFilePath);
       };
+
+      Storage::disk($fileDisk)->setVisibility($targetFilePath . $this->design->image, 'public');
     }
 }

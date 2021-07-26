@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Design extends Model
@@ -46,5 +47,18 @@ class Design extends Model
   public function setSlugAttribute($title)
   {
     $this->attributes['slug'] = Str::slug($title);
+  }
+
+  public function getImagesAttribute()
+  {
+    return [
+      'original' => $this->getImagePath('ORIGINAL_FILE'),
+      'large' => $this->getImagePath('LARGE_FILE'),
+      'thumbnail' => $this->getImagePath('THUMBNAIL_FILE'),
+    ];
+  }
+
+  protected function getImagePath($size) {
+    return Storage::disk($this->disk)->url(ltrim($this::$PUBLIC_LOCATION[$size], '/') . $this->image);
   }
 }
