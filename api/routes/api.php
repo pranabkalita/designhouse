@@ -48,6 +48,8 @@ Route::name('designs.')->group(function() {
     Route::delete('/designs/{id}', [DesignController::class, 'destroy'])->name('destroy');
 
     Route::post('/designs/{id}/comments', [CommentController::class, 'store'])->name('comment.create');
+    Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comment.update');
+    Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
   });
 
