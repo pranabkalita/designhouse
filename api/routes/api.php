@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Designs\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Designs\DesignController;
@@ -45,6 +46,8 @@ Route::name('designs.')->group(function() {
     Route::post('/designs', UploadController::class)->name('name');
     Route::put('/designs/{id}', [DesignController::class, 'update'])->name('update');
     Route::delete('/designs/{id}', [DesignController::class, 'destroy'])->name('destroy');
+
+    Route::post('/designs/{id}/comments', [CommentController::class, 'store'])->name('comment.create');
 
   });
 
