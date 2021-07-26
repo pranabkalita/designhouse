@@ -37,12 +37,15 @@ Route::name('designs.')->group(function() {
 
   // Public Routes
   Route::get('/designs', [DesignController::class, 'index'])->name('index');
+  Route::get('/designs/{id}', [DesignController::class, 'findDesign'])->name('find');
 
   // Route Group For Authenticated Users Only
   Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+
     Route::post('/designs', UploadController::class)->name('name');
-    Route::put('/designs/{design}', [DesignController::class, 'update'])->name('update');
-    Route::delete('/designs/{design}', [DesignController::class, 'destroy'])->name('destroy');
+    Route::put('/designs/{id}', [DesignController::class, 'update'])->name('update');
+    Route::delete('/designs/{id}', [DesignController::class, 'destroy'])->name('destroy');
+
   });
 
 });

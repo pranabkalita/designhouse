@@ -25,8 +25,17 @@ class DesignController extends Controller
     return DesignResource::collection($designs);
   }
 
-  public function update(Request $request, Design $design)
+  public function findDesign($id)
   {
+    $design = $this->iDesign->find($id);
+
+    return new DesignResource($design);
+  }
+
+  public function update(Request $request, $id)
+  {
+    $design = $this->iDesign->find($id);
+
     $this->authorize('update', $design);
 
     $this->validate($request, [
@@ -36,20 +45,22 @@ class DesignController extends Controller
       'tags' => 'required'
     ]);
 
-    $design->update([
+    $design = $this->iDesign->update($id, [
       'title' => $request->title,
       'description' => $request->description,
       'is_live' => !$design->upload_successful ? false : $request->is_live
     ]);
 
     // apply the tags
-    $design->retag($request->tags);
+    $this->iDesign->applyTags($id, $request->tags);
 
     return new DesignResource($design);
   }
 
-  public function destroy(Design $design)
+  public function destroy($id)
   {
+    $design = $this->iDesign->find($id);
+
     $this->authorize('delete', $design);
 
     // delete the files associated to the record
@@ -61,7 +72,7 @@ class DesignController extends Controller
       };
     });
 
-    $design->delete();
+    $this->iDesign->delete($id);
 
     return response()->json(['message' => 'Record Deleted.'], 204);
   }
