@@ -17,7 +17,7 @@ class DesignResource extends JsonResource
     {
       return [
         'id' => $this->id,
-        'user' => new UserResource($this->user),
+        'user' => new UserResource($this->whenLoaded('user')),
         'title' => $this->title,
         'slug' => $this->slug,
         'description' => $this->description,
@@ -27,7 +27,7 @@ class DesignResource extends JsonResource
           'tags' => $this->tagArray,
           'normalized' => $this->tagArrayNormalized,
         ],
-        'comments' => CommentResource::collection($this->comments),
+        'comments' => CommentResource::collection($this->whenLoaded('comments')),
         'dates' => [
           'created_at_human' => $this->created_at->diffForHumans(),
           'created_at' => $this->created_at,
