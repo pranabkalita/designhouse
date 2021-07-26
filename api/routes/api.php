@@ -33,6 +33,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
   Route::name('designs.')->group(function() {
     Route::post('/designs', UploadController::class)->name('name');
     Route::put('/designs/{design}', [DesignController::class, 'update'])->name('update');
+    Route::delete('/designs/{design}', [DesignController::class, 'destroy'])->name('destroy');
   });
 
 });
