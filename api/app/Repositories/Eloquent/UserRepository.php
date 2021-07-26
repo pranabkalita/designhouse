@@ -12,9 +12,4 @@ class UserRepository extends BaseRepository implements IUser
   {
     parent::__construct($user);
   }
-
-  public function all()
-  {
-    return $this->model->get();
-  }
 }
