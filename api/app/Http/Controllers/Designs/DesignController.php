@@ -85,4 +85,18 @@ class DesignController extends Controller
 
     return response()->json(['message' => 'Record Deleted.'], 204);
   }
+
+  public function like($id)
+  {
+    $this->iDesign->like($id);
+
+    return response()->json(['message' => 'Successful'], 200);
+  }
+
+  public function hasLikedByUser($designId)
+  {
+    $isLiked = $this->iDesign->hasLikedByUser($designId);
+
+    return response()->json(['liked' => $isLiked], 200);
+  }
 }

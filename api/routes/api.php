@@ -51,6 +51,9 @@ Route::name('designs.')->group(function() {
     Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comment.update');
     Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
+    Route::post('/designs/{id}/likes', [DesignController::class, 'like'])->name('like.create');
+    Route::get('/designs/{id}/liked', [DesignController::class, 'hasLikedByUser'])->name('like.hasLikedByUser');
+
   });
 
 });
